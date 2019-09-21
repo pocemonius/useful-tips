@@ -1,3 +1,4 @@
+<?
 CModule::IncludeModule("iblock");
 
 $db_Iblock = CIBlock::GetList(  array(),   array("CODE"=> "PRODUCTS_DOCUMENTS"));
@@ -28,3 +29,4 @@ if($ar_Iblock =$db_Iblock -> Fetch())
         }
 
 }
+?>
