@@ -11,8 +11,17 @@ if($ar_Iblock = $db_Iblock -> Fetch())
 	while($arFields = $res-> Fetch())
 	{		
 		$src = CFile::GetPath($arFields["PROPERTY_CERTIFICATE_ITEM_VALUE"]);
+		$smallPicture = CFile::ResizeImageGet(
+            $arItem["PROPERTIES"]["CERTIFICATE_ITEM"]["VALUE"],
+            array("width" => 240, "height" => 320),
+            BX_RESIZE_IMAGE_PROPORTIONAL
+		);	 
 		?>
-			<img src="<?=$src;?>" alt="<?=$arFields["NAME"]?>">
+			<div class="lightgallery">
+				<a href="<?=$src;?>">
+					<img src="<?=$smallPicture["src"];?>" alt="<?=$arItem["NAME"]?>">
+				</a>
+			</div>
 		<?
 	}
 }
