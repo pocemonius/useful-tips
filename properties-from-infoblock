@@ -1,0 +1,19 @@
+<?
+CModule::IncludeModule("iblock");
+
+$db_Iblock = CIBlock::GetList( array(), array("CODE"=> "7_s1"));
+if($ar_Iblock = $db_Iblock -> Fetch())
+{      
+	$arOrder = Array("RAND" => "ASC");
+	$arSelect = Array("ID", "IBLOCK_ID"=>$ar_Iblock["ID"], "NAME", "PROPERTY_CERTIFICATE_ITEM");
+	$arFilter = Array("ID", "IBLOCK_ID"=>$ar_Iblock["ID"], "ACTIVE"=>"Y", "!PROPERTY_CERTIFICATE_ITEM" => false);
+	$res = CIBlockElement::GetList($arOrder, $arFilter, false, Array("nPageSize"=>2), $arSelect);
+	while($arFields = $res-> Fetch())
+	{		
+		$src = CFile::GetPath($arFields["PROPERTY_CERTIFICATE_ITEM_VALUE"]);
+		?>
+			<img src="<?=$src;?>" alt="<?=$arFields["NAME"]?>">
+		<?
+	}
+}
+?>
