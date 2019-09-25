@@ -5,10 +5,10 @@ $db_Iblock = CIBlock::GetList( array(), array("CODE"=> "7_s1"));
 if($ar_Iblock = $db_Iblock -> Fetch())
 {      
 	$arOrder = Array("RAND" => "ASC");
-	$arSelect = Array("ID", "IBLOCK_ID"=>$ar_Iblock["ID"], "NAME", "PROPERTY_CERTIFICATE_ITEM");
+	$arSelect = Array("ID", "IBLOCK_ID", "NAME", "DETAIL_PAGE_URL", "LANG_ID", "PROPERTY_CERTIFICATE_ITEM");
 	$arFilter = Array("ID", "IBLOCK_ID"=>$ar_Iblock["ID"], "ACTIVE"=>"Y", "!PROPERTY_CERTIFICATE_ITEM" => false);
-	$res = CIBlockElement::GetList($arOrder, $arFilter, false, Array("nPageSize"=>2), $arSelect);
-	while($arFields = $res-> Fetch())
+	$res = CIBlockElement::GetList($arOrder, $arFilter, false, Array("nPageSize"=>4), $arSelect);
+	while($arFields = $res-> GetNext())
 	{		
 		$src = CFile::GetPath($arFields["PROPERTY_CERTIFICATE_ITEM_VALUE"]);
 		$smallPicture = CFile::ResizeImageGet(
@@ -17,11 +17,25 @@ if($ar_Iblock = $db_Iblock -> Fetch())
             "BX_RESIZE_IMAGE_PROPORTIONAL"
 		);	 
 		?>
-			<div class="lightgallery">
-				<a href="<?=$src;?>">
-					<img src="<?=$smallPicture["src"];?>" alt="<?=$arItem["NAME"]?>">
-				</a>
+		<div class="certificates-item">
+		
+			<div class="img-wrapper">
+				<?if(pathinfo($src)['extension'] == "pdf"):?>
+					<a href="<?=$src;?>" target="_blank">
+						<img src="/bitrix/templates/dresscode_custom/images/pdf-icon-certificates-sm.png" alt="<?=$arItem["NAME"]?>">
+					</a>
+				<?else:?>
+					<div class="lightgallery">
+						<a href="<?=$src;?>">
+							<img src="<?=$smallPicture["src"];?>" alt="<?=$arItem["NAME"]?>">
+						</a>
+					</div>
+				<?endif;?>
 			</div>
+			<div class="description-wrapper">
+				<a href="<?=$arFields['DETAIL_PAGE_URL']?>"><?=$arFields["NAME"]?></a>
+			</div>
+		</div>
 		<?
 	}
 }
