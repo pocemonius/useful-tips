@@ -12,9 +12,9 @@ if($ar_Iblock = $db_Iblock -> Fetch())
 	{		
 		$src = CFile::GetPath($arFields["PROPERTY_CERTIFICATE_ITEM_VALUE"]);
 		$smallPicture = CFile::ResizeImageGet(
-            $arItem["PROPERTIES"]["CERTIFICATE_ITEM"]["VALUE"],
+            $arFields["PROPERTY_CERTIFICATE_ITEM_VALUE"],
             array("width" => 240, "height" => 320),
-            BX_RESIZE_IMAGE_PROPORTIONAL
+            "BX_RESIZE_IMAGE_PROPORTIONAL"
 		);	 
 		?>
 			<div class="lightgallery">
