@@ -1,0 +1,11 @@
+<?$resul = CIBlockElement::GetProperty($arParams["IBLOCK_ID"], $arResult["ITEM"]["ID"], Array(), Array("CODE"=>"BRAND_VIDEO"));
+				while($arFields = $resul-> Fetch())
+				{
+					?>
+					
+					<div class="video-item">
+						<?=$arFields["VALUE"]["TEXT"]?>
+					</div>
+					<?
+				}	
+				?>
