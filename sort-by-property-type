@@ -1,0 +1,24 @@
+foreach ($ar_section["UF_RECOMENDED"] as $propItem) {
+					
+				
+					$UpperPropItem = strtoupper($propItem);
+					if($arResult["PROPERTIES"][$propItem]["PROPERTY_TYPE"] == "L" ){
+						$arFilter["PROPERTY_".$UpperPropItem."_VALUE"] = $arResult["PROPERTIES"]["$propItem"]["VALUE"];
+					}
+					else {
+					$arFilter["PROPERTY_".$UpperPropItem] = $arResult["PROPERTIES"]["$propItem"]["VALUE"];
+					}
+
+					/*
+					$db_prop = CIBlockProperty::GetList(array(), array("IBLOCK_ID" => $arParams["IBLOCK_ID"], "CODE" => $propItem));
+					if($ar_prop  = $db_prop -> Fetch())	{
+						$UpperPropItem = strtoupper($propItem);
+						if($ar_prop["PROPERTY_TYPE"] == "L" ){
+							$arFilter["PROPERTY_".$UpperPropItem."_VALUE"] = $arResult["PROPERTIES"]["$propItem"]["VALUE"];
+						}
+						else {
+						$arFilter["PROPERTY_".$UpperPropItem] = $arResult["PROPERTIES"]["$propItem"]["VALUE"];
+						}
+					}
+					*/
+				}
