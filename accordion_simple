@@ -1,0 +1,38 @@
+<dl id="accordion">
+    <dt class="active">Заголовок 1</dt>
+    <dd>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, vero.</dd>
+    <dt>Заголовок 2</dt>
+    <dd>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, vero.</dd>
+    <dt>Заголовок 3</dt>
+    <dd>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, vero.</dd>
+    <dt>Заголовок 4</dt>
+    <dd>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veniam, vero.</dd>
+</dl>
+
+<style>
+#accordion dd{
+    display: none;
+}
+#accordion dd:first-of-type{
+    display: block;
+}
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(function(){
+        var allPanels = $('#accordion > dd');
+        var allTitles = $('#accordion > dt');
+        allTitles.on("click", function(){
+            if( $(this).hasClass("active") ){
+                $(this).removeClass("active");
+                allPanels.slideUp();
+            } else{
+                allTitles.removeClass("active");
+                $(this).addClass("active");
+                allPanels.slideUp();
+                $(this).next().slideDown();
+            }
+        });
+    });
+</script>
