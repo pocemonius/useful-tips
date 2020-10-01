@@ -1,0 +1,51 @@
+<div class="lang_block_4">
+	<span>
+		<?
+			$lang_list = array("ru","en");
+			$lang_to_url_list = array("ru"=>"","en"=>"/en");
+			if(substr($APPLICATION->GetCurPage(),0,1) == "/" ){
+				$lang_from_url = substr($APPLICATION->GetCurPage(),0,4);
+			}else{
+				$lang_from_url = substr($APPLICATION->GetCurPage(),0,3);
+			}
+			$lang = str_replace("/","",$lang_from_url);
+			if(!in_array($lang,$lang_list)){
+				$lang = "ru";
+				$lang_from_url = "/";
+			}
+			$clear_url = substr($APPLICATION->GetCurPage(),strlen($lang_from_url));
+
+			if(empty($clear_url)){
+				$clear_url = "";
+			}
+			
+			if(empty($lang)){
+							$lang = "ru";
+			}
+			if($lang == "ru"){
+				$lang = "RU";
+			}if($lang == "en"){
+				$lang = "EN";
+			}
+		?>
+		<span class="active_lang"><?=$lang;?></span> 
+	</span>
+	
+<div class="wrapper_list_lang">
+	<div class="list_lang">
+	<?foreach($lang_list as $lang_to_switch){
+		if($lang_to_switch == "ru"){
+			continue;
+		}
+		if($lang_to_switch == "en"){
+			$lang_to_switchName = "EN";
+		}
+		if($lang_to_switch == $lang){
+			continue;
+		}else{?>
+			<a href="<?=$lang_to_url_list[$lang_to_switch]?>/<?=$clear_url?>"><?=$lang_to_switchName;?></a>
+		<?}
+	}?>
+	</div>
+</div>
+</div>
