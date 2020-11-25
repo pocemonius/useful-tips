@@ -1,0 +1,11 @@
+<?$APPLICATION->IncludeComponent(
+				"bitrix:main.include",
+				".default",
+				array(
+					"AREA_FILE_SHOW" => "file",
+					"AREA_FILE_SUFFIX" => "inc",
+					"EDIT_TEMPLATE" => "",
+					"PATH" => "/includes/contacts/contacts-inc.php"
+				),
+				false
+			);?>
