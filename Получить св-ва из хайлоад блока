@@ -1,0 +1,26 @@
+<?
+use Bitrix\Highloadblock\HighloadBlockTable;
+CModule::IncludeModule('highloadblock');
+$HighloadBlockTable = Bitrix\Highloadblock\HighloadBlockTable::getList(array(
+	'select' => array('*'),
+	'filter' => array('TABLE_NAME' => 'menu_links')
+));
+
+if ($hlblock = $HighloadBlockTable->fetch()) {
+	$entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock); 
+	$entityDataClass = $entity->getDataClass();
+
+	$rsData = $entityDataClass::getList(array(
+		'order' => array('UF_SORT'=>'ASC'),
+		'select' => array('*'),
+		'filter' => array('!UF_NAME'=>false)
+	));
+
+	while($el = $rsData->fetch()){
+		echo "<pre>";
+		var_dump($el);
+		echo "</pre>";
+
+	}
+}
+?>
