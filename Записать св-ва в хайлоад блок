@@ -1,0 +1,21 @@
+        use Bitrix\Highloadblock\HighloadBlockTable;
+        CModule::IncludeModule('highloadblock');
+        $HighloadBlockTable = Bitrix\Highloadblock\HighloadBlockTable::getList(array(
+            'select' => array('*'),
+            'filter' => array('TABLE_NAME' => 'opt_request')
+        ));
+        if ($hlblock = $HighloadBlockTable->fetch()) {
+            $entity = Bitrix\Highloadblock\HighloadBlockTable::compileEntity($hlblock); 
+            $entityDataClass = $entity->getDataClass();
+
+            $res = $entityDataClass::add(array(
+                'UF_DATE' => date("Y-m-d H:i:s"),
+                'UF_NAME' => $_REQUEST['name'],
+                'UF_PHONE' => $_REQUEST['phone'],
+            ));
+            if ($res->IsSuccess()) {
+                $result = $res->GetID();
+            } else {
+                $errors = $res->getErrorMessages();
+            }
+        }
